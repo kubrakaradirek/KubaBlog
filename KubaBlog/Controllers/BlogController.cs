@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KubaBlog.BusinessLayer.Concrete;
+using KubaBlog.DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
 {
     public class BlogController : Controller
     {
+        BlogManager bm=new BlogManager(new EfBlogRepository()); 
         public IActionResult Index()
         {
-            return View();
+            var values = bm.GetBlogLisWithCategory();
+            return View(values);
         }
     }
 }
