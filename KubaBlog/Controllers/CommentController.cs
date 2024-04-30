@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KubaBlog.BusinessLayer.Concrete;
+using KubaBlog.DataAccessLayer.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
 {
     public class CommentController : Controller
     {
+        CommentManager cm=new CommentManager(new EfCommentRepository());
         public IActionResult Index()
         {
             return View();
@@ -12,9 +15,10 @@ namespace KubaBlog.Controllers
         {
             return PartialView();
         }
-        public PartialViewResult CommentListByBlog()
+        public PartialViewResult CommentListByBlog(int id)
         {
-            return PartialView();
+            var values=cm.GetList(id);
+            return PartialView(values);
         }
     }
 }
