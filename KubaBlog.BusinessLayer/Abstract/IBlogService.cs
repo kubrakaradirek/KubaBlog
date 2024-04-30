@@ -15,5 +15,6 @@ namespace KubaBlog.BusinessLayer.Abstract
 		List<Blog> GetList();
 		Blog GetById(int id);
 		List<Blog> GetBlogLisWithCategory();
+		List<Blog> GetBlogListByWriter(int id);
 	}
 }
