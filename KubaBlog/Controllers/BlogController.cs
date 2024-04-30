@@ -12,5 +12,10 @@ namespace KubaBlog.Controllers
             var values = bm.GetBlogLisWithCategory();
             return View(values);
         }
+        public IActionResult BlogReadAll(int id)
+        {
+            var values=bm.GetBlogById(id);
+            return View(values);
+        }
     }
 }

@@ -42,6 +42,10 @@ namespace KubaBlog.BusinessLayer.Concrete
 		{
 			return _blogDal.GetById(id);
 		}
+		public List <Blog> GetBlogById(int id) 
+		{
+			return _blogDal.GetListAll(x => x.BlogId == id);
+		}
 
 		public List<Blog> GetList()
 		{
