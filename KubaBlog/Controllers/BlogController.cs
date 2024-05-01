@@ -12,7 +12,8 @@ namespace KubaBlog.Controllers
     [AllowAnonymous]
     public class BlogController : Controller
     {
-        BlogManager bm=new BlogManager(new EfBlogRepository()); 
+        BlogManager bm=new BlogManager(new EfBlogRepository());
+        CategoryManager cm = new CategoryManager(new EfCategoryRepositoy());
         public IActionResult Index()
         {
             var values = bm.GetBlogLisWithCategory();
@@ -26,13 +27,19 @@ namespace KubaBlog.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var values=bm.GetBlogListByWriter(2);
+            var values=bm.GetListWithCategoryByWriterBm(2);
             return View(values);
         }
         [HttpGet]
         public IActionResult BlogAdd()
         {
-
+            List<SelectListItem> categoryValues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryId.ToString()
+                                                   }).ToList();
+            ViewBag.cv = categoryValues;
             return View();
         }
 
@@ -57,6 +64,52 @@ namespace KubaBlog.Controllers
                 }
                 return View();
             }
+        }
+        [AllowAnonymous]
+        public IActionResult BlogDelete(int id)
+        {
+            var value = bm.TGetById(id);
+            bm.TDelete(value);
+            return RedirectToAction("BlogListByWriter");
+        }
+        [HttpGet]
+        public IActionResult EditBlog(int id)
+        {
+            var value = bm.TGetById(id);
+            List<SelectListItem> categoryValues = (from x in cm.GetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.CategoryName,
+                                                       Value = x.CategoryId.ToString()
+                                                   }).ToList();
+            ViewBag.cv = categoryValues;
+            return View(value);
+        }
+
+        [HttpPost]
+        public IActionResult EditBlog(Blog p)
+        {
+            var blogValue = bm.TGetById(p.BlogId);
+            p.WriterId = 2;
+            p.BlogCreatedDate = DateTime.Now.ToShortDateString();
+            p.BlogStatus = true;
+            bm.TUpdate(p);
+            return RedirectToAction("BlogListByWriter");
+            //var username = User.Identity.Name;
+            //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            //var writerID = c.Writers.Where(x => x.Mail == usermail).Select(y => y.WriterId).FirstOrDefault();
+
+            ////var value = bm.GetBlogByID(blog.BlogId);
+            //blog.WriterId = writerID;
+            //blog.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            //blog.Status = true;
+            //bm.TUpdate(blog);
+            //GetCategoryList();
+            //return RedirectToAction("GetBlogListByWriter");
+
+
+
+
         }
     }
 }
