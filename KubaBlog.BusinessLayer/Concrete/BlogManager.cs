@@ -18,21 +18,6 @@ namespace KubaBlog.BusinessLayer.Concrete
 			_blogDal = blogDal;
 		}
 
-		public void BlogAdd(Blog Blog)
-		{
-			_blogDal.Insert(Blog);
-		}
-
-		public void BlogDelete(Blog Blog)
-		{
-			_blogDal.Delete(Blog);
-		}
-
-		public void BlogUpdate(Blog Blog)
-		{
-			_blogDal.Update(Blog);
-		}
-
         public List<Blog> GetBlogLisWithCategory()
         {
             return _blogDal.GetListWithCategory();
@@ -60,5 +45,20 @@ namespace KubaBlog.BusinessLayer.Concrete
 		{
 			return _blogDal.GetListAll(x => x.WriterId == id);
 		}
-	}
+
+        public void TAdd(Blog t)
+        {
+            _blogDal.Insert(t);
+        }
+
+        public void TDelete(Blog t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TUpdate(Blog t)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
