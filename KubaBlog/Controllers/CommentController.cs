@@ -1,5 +1,6 @@
 ﻿using KubaBlog.BusinessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
+using KubaBlog.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
@@ -11,8 +12,19 @@ namespace KubaBlog.Controllers
         {
             return View();
         }
-        public PartialViewResult PartialAddComment()
+        [HttpGet]
+        public  PartialViewResult PartialAddComment()
         {
+            return PartialView();
+        }
+        [HttpPost]
+        public IActionResult PartialAddComment(Comment comment)
+        {
+            comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            comment.CommentStatus = true;
+            comment.BlogId = 5;
+            cm.CommentAdd(comment);
+            Response.Redirect("/Blog/Index/" + 1);
             return PartialView();
         }
         public PartialViewResult CommentListByBlog(int id)
