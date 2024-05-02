@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KubaBlog.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240501195342_add_score_coloum")]
-    partial class add_score_coloum
+    [Migration("20240502052447_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,28 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("Blogs");
+                });
+
+            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.BlogRayting", b =>
+                {
+                    b.Property<int>("BlogRatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogRatingId"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogRaytingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogTotalScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlogRatingId");
+
+                    b.ToTable("BlogRaytings");
                 });
 
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Category", b =>

@@ -12,7 +12,7 @@ namespace KubaBlog.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=MONSTER\\MSSQLSERVERR;initial Catalog=KubaBlogDb; User=sa;Password=622622aA.");
+            optionsBuilder.UseSqlServer("server=MONSTER\\MSSQLSERVERR;initial Catalog=KubaBlogDB; User=sa;Password=622622aA.");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Blog> Blogs { get; set; }
@@ -21,5 +21,6 @@ namespace KubaBlog.DataAccessLayer.Concrete
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Writer> Writers { get; set; }
         public DbSet<NewsLetter> NewsLetters { get; set; }
+        public DbSet<BlogRayting> BlogRaytings { get; set; }
     }
 }

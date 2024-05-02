@@ -104,6 +104,28 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.BlogRayting", b =>
+                {
+                    b.Property<int>("BlogRatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogRatingId"), 1L, 1);
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogRaytingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogTotalScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlogRatingId");
+
+                    b.ToTable("BlogRaytings");
+                });
+
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Category", b =>
                 {
                     b.Property<int>("CategoryId")
