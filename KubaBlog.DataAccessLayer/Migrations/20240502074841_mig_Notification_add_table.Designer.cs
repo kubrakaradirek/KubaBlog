@@ -4,6 +4,7 @@ using KubaBlog.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KubaBlog.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240502074841_mig_Notification_add_table")]
+    partial class mig_Notification_add_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,7 +274,7 @@ namespace KubaBlog.DataAccessLayer.Migrations
 
                     b.HasKey("NotificationId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("notifications");
                 });
 
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Writer", b =>
@@ -288,19 +290,15 @@ namespace KubaBlog.DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WriterImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WriterMail")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WriterName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WriterPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("WriterStatus")
