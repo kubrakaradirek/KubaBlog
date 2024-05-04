@@ -1,0 +1,29 @@
+﻿@using KubaBlog.EntityLayer.Concrete
+@model List<Message2>
+@{
+    ViewData["Title"] = "InBox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Gelen Mesajlar</h1>
+<table class="table table-hover">
+    <tr>
+        <th>#</th>
+        <th>Konu</th>
+        <th>Gönderen</th>
+        <th>Tarih</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>@item.MessageId</th>
+            <td>@item.Subject</td>
+            <td>@item.SenderUser.WriterName</td>
+            <td>@(item.MessageDate.ToString("dd-MMM-yyyy"))</td>
+            <td><a href="/Message/MessageDetails/@item.MessageId" class="btn btn-warning">Mesajı Aç</a></td>
+        </tr>
+    }
+</table>
+<td><a href="/Blog/BlogAdd/" class="btn btn-primary">Yeni Mesaj oluştur</a></td>
+

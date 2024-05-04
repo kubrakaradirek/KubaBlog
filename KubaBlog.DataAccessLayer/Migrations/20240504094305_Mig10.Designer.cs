@@ -4,6 +4,7 @@ using KubaBlog.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KubaBlog.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240504094305_Mig10")]
+    partial class Mig10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,39 +226,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Match", b =>
-                {
-                    b.Property<int>("MatchId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MatchId"), 1L, 1);
-
-                    b.Property<int?>("GuestTeamId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HomeTeamId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("MatchDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Stadium")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MatchId");
-
-                    b.HasIndex("GuestTeamId");
-
-                    b.HasIndex("HomeTeamId");
-
-                    b.ToTable("Matches");
-                });
-
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Message", b =>
                 {
                     b.Property<int>("MessageId")
@@ -290,43 +259,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.HasKey("MessageId");
 
                     b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Message2", b =>
-                {
-                    b.Property<int>("MessageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
-
-                    b.Property<DateTime>("MessageDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("MessageStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MessageId");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Message2s");
                 });
 
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.NewsLetter", b =>
@@ -382,23 +314,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.HasKey("NotificationId");
 
                     b.ToTable("Notifications");
-                });
-
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Team", b =>
-                {
-                    b.Property<int>("TeamId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeamId"), 1L, 1);
-
-                    b.Property<string>("TeamName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TeamId");
-
-                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Writer", b =>
@@ -467,38 +382,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.Navigation("Blog");
                 });
 
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Match", b =>
-                {
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Team", "GuestTeam")
-                        .WithMany("AwayMatches")
-                        .HasForeignKey("GuestTeamId")
-                        .IsRequired();
-
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Team", "HomeTeam")
-                        .WithMany("HomeMatches")
-                        .HasForeignKey("HomeTeamId")
-                        .IsRequired();
-
-                    b.Navigation("GuestTeam");
-
-                    b.Navigation("HomeTeam");
-                });
-
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Message2", b =>
-                {
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Writer", "ReceiverUser")
-                        .WithMany("WriterReceiver")
-                        .HasForeignKey("ReceiverId");
-
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Writer", "SenderUser")
-                        .WithMany("WriterSender")
-                        .HasForeignKey("SenderId");
-
-                    b.Navigation("ReceiverUser");
-
-                    b.Navigation("SenderUser");
-                });
-
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Blog", b =>
                 {
                     b.Navigation("Comments");
@@ -509,20 +392,9 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.Navigation("Blogs");
                 });
 
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Team", b =>
-                {
-                    b.Navigation("AwayMatches");
-
-                    b.Navigation("HomeMatches");
-                });
-
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Writer", b =>
                 {
                     b.Navigation("Blogs");
-
-                    b.Navigation("WriterReceiver");
-
-                    b.Navigation("WriterSender");
                 });
 #pragma warning restore 612, 618
         }

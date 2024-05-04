@@ -4,6 +4,7 @@ using KubaBlog.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KubaBlog.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240504104225_team_match")]
+    partial class team_match
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,43 +294,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Message2", b =>
-                {
-                    b.Property<int>("MessageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageId"), 1L, 1);
-
-                    b.Property<DateTime>("MessageDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageDetails")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("MessageStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ReceiverId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MessageId");
-
-                    b.HasIndex("ReceiverId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("Message2s");
-                });
-
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.NewsLetter", b =>
                 {
                     b.Property<int>("MailID")
@@ -484,21 +449,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.Navigation("HomeTeam");
                 });
 
-            modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Message2", b =>
-                {
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Writer", "ReceiverUser")
-                        .WithMany("WriterReceiver")
-                        .HasForeignKey("ReceiverId");
-
-                    b.HasOne("KubaBlog.EntityLayer.Concrete.Writer", "SenderUser")
-                        .WithMany("WriterSender")
-                        .HasForeignKey("SenderId");
-
-                    b.Navigation("ReceiverUser");
-
-                    b.Navigation("SenderUser");
-                });
-
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Blog", b =>
                 {
                     b.Navigation("Comments");
@@ -519,10 +469,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
             modelBuilder.Entity("KubaBlog.EntityLayer.Concrete.Writer", b =>
                 {
                     b.Navigation("Blogs");
-
-                    b.Navigation("WriterReceiver");
-
-                    b.Navigation("WriterSender");
                 });
 #pragma warning restore 612, 618
         }
