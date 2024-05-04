@@ -9,7 +9,6 @@ namespace KubaBlog.Controllers
     public class DashboardController : Controller
     {
         BlogManager bm=new BlogManager(new EfBlogRepository());
-        [AllowAnonymous]
         public IActionResult Index()
         {
             Context c=new Context();

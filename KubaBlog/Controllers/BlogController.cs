@@ -1,5 +1,6 @@
 ﻿using KubaBlog.BusinessLayer.Concrete;
 using KubaBlog.BusinessLayer.ValidationRules;
+using KubaBlog.DataAccessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
@@ -9,11 +10,11 @@ using System.Configuration;
 
 namespace KubaBlog.Controllers
 {
-    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm=new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepositoy());
+        Context c = new Context();
         public IActionResult Index()
         {
             var values = bm.GetBlogLisWithCategory();
@@ -27,7 +28,9 @@ namespace KubaBlog.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var values=bm.GetListWithCategoryByWriterBm(2);
+            var userEmail = User.Identity.Name;
+            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
+            var values=bm.GetListWithCategoryByWriterBm(writerId);
             return View(values);
         }
         [HttpGet]
@@ -46,13 +49,15 @@ namespace KubaBlog.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
+            var userEmail = User.Identity.Name;
+            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
             BlogValidator wv = new BlogValidator();
             FluentValidation.Results.ValidationResult results = wv.Validate(p);
             if (results.IsValid)
             {
                 p.BlogStatus = true;
                 p.BlogCreatedDate = DateTime.Now.ToShortDateString();
-                p.WriterId = 2;
+                p.WriterId = writerId;
                 bm.TAdd(p); 
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -89,27 +94,14 @@ namespace KubaBlog.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
+            var userEmail = User.Identity.Name;
+            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
             var blogValue = bm.TGetById(p.BlogId);
-            p.WriterId = 2;
+            p.WriterId = writerId;
             p.BlogCreatedDate = DateTime.Now.ToShortDateString();
             p.BlogStatus = true;
             bm.TUpdate(p);
             return RedirectToAction("BlogListByWriter");
-            //var username = User.Identity.Name;
-            //var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            //var writerID = c.Writers.Where(x => x.Mail == usermail).Select(y => y.WriterId).FirstOrDefault();
-
-            ////var value = bm.GetBlogByID(blog.BlogId);
-            //blog.WriterId = writerID;
-            //blog.CreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            //blog.Status = true;
-            //bm.TUpdate(blog);
-            //GetCategoryList();
-            //return RedirectToAction("GetBlogListByWriter");
-
-
-
-
         }
     }
 }

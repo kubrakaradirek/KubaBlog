@@ -14,8 +14,14 @@ namespace KubaBlog.Controllers
 	public class WriterController : Controller
 	{
 		WriterManager wm=new WriterManager(new EfWriterRepository());
+        [Authorize]
 		public IActionResult Index()
 		{
+            var userEmail = User.Identity.Name;
+            ViewBag.v = userEmail;
+            Context c=new Context();
+            var writerName = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.v2=writerName;
 			return View();
 		}
 		public IActionResult WriterProfile()
@@ -37,14 +43,15 @@ namespace KubaBlog.Controllers
         {
             return PartialView();
         }
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult WriterEditProfile()
         {
-            var writerValues = wm.TGetById(2);
+            Context c=new Context();    
+            var userEmail = User.Identity.Name;
+            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
+            var writerValues = wm.TGetById(writerId);
             return View(writerValues);
         }
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult WriterEditProfile(Writer p)
         {
