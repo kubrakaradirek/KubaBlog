@@ -1,9 +1,11 @@
 ﻿using ClosedXML.Excel;
 using KubaBlog.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class BlogController : Controller
     {
         //Excellden bilgi çekmek için
@@ -39,6 +41,10 @@ namespace KubaBlog.Areas.Admin.Controllers
                 new BlogModel {Id=3,BlogName="2020 Olimpiyatları"}
             };
             return bm;
+        }
+        public IActionResult BlogListExcel()
+        {
+            return View();
         }
     }
 }

@@ -2,9 +2,10 @@
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    [Area("Admin")]
+    public class WidgetController : Controller
     {
-        public IActionResult Indexx()
+        public IActionResult Index()
         {
             return View();
         }
