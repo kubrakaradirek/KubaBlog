@@ -10,11 +10,13 @@ using System.Configuration;
 
 namespace KubaBlog.Controllers
 {
+    [AllowAnonymous]
     public class BlogController : Controller
     {
         BlogManager bm=new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepositoy());
         Context c = new Context();
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var values = bm.GetBlogLisWithCategory();

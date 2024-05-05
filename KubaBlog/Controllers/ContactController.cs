@@ -1,11 +1,13 @@
 ﻿using KubaBlog.BusinessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
 {
-	public class ContactController : Controller
+    [AllowAnonymous]
+    public class ContactController : Controller
 	{
 		ContactManager cm=new ContactManager(new EfContactRepository());
 		[HttpGet]

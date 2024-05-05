@@ -1,10 +1,12 @@
 ﻿using KubaBlog.BusinessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
 {
+    [AllowAnonymous]
     public class CommentController : Controller
     {
         CommentManager cm=new CommentManager(new EfCommentRepository());

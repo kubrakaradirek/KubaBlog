@@ -47,7 +47,8 @@ namespace KubaBlog.Controllers
         public IActionResult WriterEditProfile()
         {
             Context c=new Context();    
-            var userEmail = User.Identity.Name;
+            var userName = User.Identity.Name;
+            var userEmail=c.Users.Where(x=>x.UserName==userName).Select(y => y.Email).FirstOrDefault();
             var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
             var writerValues = wm.TGetById(writerId);
             return View(writerValues);
