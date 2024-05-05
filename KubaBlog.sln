@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog", "KubaBlog\KubaBlog.csproj", "{28007BDD-2436-4A7E-A662-F90B24D95B89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog", "KubaBlog\KubaBlog.csproj", "{28007BDD-2436-4A7E-A662-F90B24D95B89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog.EntityLayer", "KubaBlog.EntityLayer\KubaBlog.EntityLayer.csproj", "{98D53B5C-C970-4CCE-89BB-05E847BB9322}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.EntityLayer", "KubaBlog.EntityLayer\KubaBlog.EntityLayer.csproj", "{98D53B5C-C970-4CCE-89BB-05E847BB9322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog.CoreLayer", "KubaBlog.CoreLayer\KubaBlog.CoreLayer.csproj", "{5E038ADC-91B5-42B6-8265-6B3D2844CA6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.CoreLayer", "KubaBlog.CoreLayer\KubaBlog.CoreLayer.csproj", "{5E038ADC-91B5-42B6-8265-6B3D2844CA6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog.DataAccessLayer", "KubaBlog.DataAccessLayer\KubaBlog.DataAccessLayer.csproj", "{A4207CC8-768D-421C-BE69-8987712F4C58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.DataAccessLayer", "KubaBlog.DataAccessLayer\KubaBlog.DataAccessLayer.csproj", "{A4207CC8-768D-421C-BE69-8987712F4C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog.BusinessLayer", "KubaBlog.BusinessLayer\KubaBlog.BusinessLayer.csproj", "{AF430CDC-48B4-4889-B104-2E66CF94F087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.BusinessLayer", "KubaBlog.BusinessLayer\KubaBlog.BusinessLayer.csproj", "{AF430CDC-48B4-4889-B104-2E66CF94F087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlogApi", "KubaBlogApi\KubaBlogApi.csproj", "{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{AF430CDC-48B4-4889-B104-2E66CF94F087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF430CDC-48B4-4889-B104-2E66CF94F087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF430CDC-48B4-4889-B104-2E66CF94F087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
