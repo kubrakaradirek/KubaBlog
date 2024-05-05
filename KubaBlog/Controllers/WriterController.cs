@@ -6,6 +6,7 @@ using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
 using KubaBlog.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -14,6 +15,15 @@ namespace KubaBlog.Controllers
 	public class WriterController : Controller
 	{
 		WriterManager wm=new WriterManager(new EfWriterRepository());
+        private readonly UserManager<AppUser> _userManager;
+        UserManager userManager = new UserManager(new EfUserRepository());
+
+
+        public WriterController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         [Authorize]
 		public IActionResult Index()
 		{
@@ -44,43 +54,25 @@ namespace KubaBlog.Controllers
             return PartialView();
         }
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c=new Context();    
-            var userName = User.Identity.Name;
-            var userEmail=c.Users.Where(x=>x.UserName==userName).Select(y => y.Email).FirstOrDefault();
-            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
-            var writerValues = wm.TGetById(writerId);
-            return View(writerValues);
+            var values=await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateVİewModel model=new UserUpdateVİewModel();
+           model.namesurname = values.NameSurname;
+            model.imageurl = values.ImageUrl;
+            model.email = values.Email;
+            model.username = values.UserName;
+            return View(model);
         }
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer p)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateVİewModel model)
         {
-            var pas1 = Request.Form["pass1"];
-            var pas2 = Request.Form["pass2"];
-            if (pas1 == pas2)
-            {
-                p.WriterPassword = pas2;
-                WriterValidator validationRules = new WriterValidator();
-                ValidationResult result = validationRules.Validate(p);
-                if (result.IsValid)
-                {
-                    wm.TUpdate(p);
-                    return RedirectToAction("Index", "Dashboard");
-                }
-                else
-                {
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                    }
-                }
-            }
-            else
-            {
-                ViewBag.hata = "Girdiğiniz Parolalar Uyuşmuyor!";
-            }
-            return View();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.NameSurname = model.namesurname;
+            values.ImageUrl = model.imageurl;
+            values.Email = model.email;
+            var result=await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
         }
         [AllowAnonymous]
         [HttpGet]
