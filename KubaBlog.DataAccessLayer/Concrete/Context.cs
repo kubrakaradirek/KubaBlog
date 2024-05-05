@@ -1,4 +1,5 @@
 ﻿using KubaBlog.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KubaBlog.DataAccessLayer.Concrete
 {
-    public class Context:DbContext
+    public class Context:IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +41,7 @@ namespace KubaBlog.DataAccessLayer.Concrete
                 .HasForeignKey(z=>z.ReceiverId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            base.OnModelCreating(modelBuilder); 
             //HomeMatched-->WriterSender
             //AwayMatches-->WriterReveiver
 
