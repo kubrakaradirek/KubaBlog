@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using KubaBlog.Areas.Admin.Models;
+using KubaBlog.DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 
@@ -31,6 +32,41 @@ namespace KubaBlog.Areas.Admin.Controllers
                     return File(content,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","Calisma1.xlsx");
                 }
             };
+        }
+        public IActionResult ExportDinamicExcelBlogList()
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Blog Listesi");
+                worksheet.Cell(1, 1).Value = "BlogID";
+                worksheet.Cell(1, 2).Value = "Blog Adı";
+                int BlogRowCount = 2;
+                foreach (var item in GetDinamicBlogList())
+                {
+                    worksheet.Cell(BlogRowCount, 1).Value = item.Id;
+                    worksheet.Cell(BlogRowCount, 2).Value = item.BlogName;
+                    BlogRowCount++;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var context = stream.ToArray();
+                    return File(context, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Dosya.xlsx");
+                }
+            }
+        }
+        public List<BlogModel> GetDinamicBlogList()
+        {
+            var bm = new List<BlogModel>();
+            using (var c = new Context())
+            {
+                bm = c.Blogs.Select(x => new BlogModel
+                {
+                    Id = x.BlogId,
+                    BlogName = x.BlogTitle
+                }).ToList();
+            }
+            return bm;
         }
         public List<BlogModel> GetBlogList()
         {

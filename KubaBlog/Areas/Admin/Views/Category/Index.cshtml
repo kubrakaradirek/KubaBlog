@@ -15,16 +15,36 @@
     <th>Kategori Adı</th>
     <th>Pasif Yap</th>
     <th>Aktif Yap</th>
-    <th>Düzenle</th>
+    <th>Kalıcı Sil</th>
 </tr>
 @foreach(var item in Model)
 {
     <tr>
         <th>@item.CategoryId</th>
         <td>@item.CategoryName</td>
-            <td><a href="/Admin/Category/CategoryDelete/@item.CategoryId/" id="DeleteBtn" onclick="return confirm('Silmek istediğinize emin misiniz?');" class="btn btn-danger">Pasif Yap</a></td>
-        <td><a href="#" class="btn btn-warning">Aktif Yap</a></td>
-        <td><a href="#" class="btn btn-success">Düzenle</a></td>
+            <td>
+                @if (item.CategoryStatus)
+                {
+                    <span class="badge badge-success">Aktif</span>
+                }
+                else
+                {
+                    <span class="badge badge-secondary">Pasif</span>
+                }
+            </td>
+            <td>
+
+                @if (item.CategoryStatus)
+                {
+                    <a href="~/Admin/Category/ChangeStatusCategory/@item.CategoryId" id="Durum_@item.CategoryId" class="btn btn-secondary">Pasif Yap</a>
+                }
+                else
+                {
+                    <a href="~/Admin/Category/ChangeStatusCategory/@item.CategoryId" id="Durum_@item.CategoryId" class="btn btn-success">Aktif Yap</a>
+                }
+
+            </td>
+            <td> <a href="~/Admin/Category/CategoryDelete/@item.CategoryId" class="btn btn-danger"> Sil </a> </td>
     </tr>
 }
 </table>

@@ -1,8 +1,12 @@
-﻿using KubaBlog.BusinessLayer.Concrete;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using KubaBlog.BusinessLayer.Concrete;
 using KubaBlog.BusinessLayer.ValidationRules;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 using X.PagedList;
 
 namespace KubaBlog.Areas.Admin.Controllers
@@ -40,6 +44,21 @@ namespace KubaBlog.Areas.Admin.Controllers
                 }
                 return View();
             }
+        }
+        public IActionResult ChangeStatusCategory(int id)
+        {
+            var value = cm.TGetById(id);
+            if (value.CategoryStatus)
+            {
+                value.CategoryStatus = false;
+            }
+            else
+            {
+                value.CategoryStatus = true;
+            }
+            cm.TUpdate(value);
+
+            return RedirectToAction("Index");
         }
         public IActionResult CategoryDelete(int id)
         {
