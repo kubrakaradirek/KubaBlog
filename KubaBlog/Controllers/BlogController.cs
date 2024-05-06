@@ -4,9 +4,11 @@ using KubaBlog.DataAccessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Configuration;
+using System.Security.Claims;
 
 namespace KubaBlog.Controllers
 {
@@ -16,7 +18,14 @@ namespace KubaBlog.Controllers
         BlogManager bm=new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepositoy());
         Context c = new Context();
-        [AllowAnonymous]
+        private readonly UserManager<AppUser> _userManager;
+        UserManager userManager = new UserManager(new EfUserRepository());
+
+        public BlogController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
             var values = bm.GetBlogLisWithCategory();
@@ -30,11 +39,12 @@ namespace KubaBlog.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var userEmail = User.Identity.Name;
-            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
-            var values=bm.GetListWithCategoryByWriterBm(writerId);
+            var writerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var values = bm.GetListWithCategoryByWriterBm(writerId);
             return View(values);
+
         }
+
         [HttpGet]
         public IActionResult BlogAdd()
         {
@@ -51,8 +61,9 @@ namespace KubaBlog.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
-            var userEmail = User.Identity.Name;
-            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
+            //yenisi
+            var writerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var values = bm.GetListWithCategoryByWriterBm(writerId);
             BlogValidator wv = new BlogValidator();
             FluentValidation.Results.ValidationResult results = wv.Validate(p);
             if (results.IsValid)
@@ -96,9 +107,8 @@ namespace KubaBlog.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
-            var userEmail = User.Identity.Name;
-            var writerId = c.Writers.Where(x => x.WriterMail == userEmail).Select(y => y.WriterId).FirstOrDefault();
-            var blogValue = bm.TGetById(p.BlogId);
+            var writerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var values = bm.GetListWithCategoryByWriterBm(writerId);
             p.WriterId = writerId;
             p.BlogCreatedDate = DateTime.Now.ToShortDateString();
             p.BlogStatus = true;

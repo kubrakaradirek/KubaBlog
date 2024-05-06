@@ -13,7 +13,7 @@ namespace KubaBlog.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=MONSTER\\MSSQLSERVERR;initial Catalog=KubaBlogDB; User=sa;Password=622622aA.");
+            optionsBuilder.UseSqlServer("server=MONSTER\\MSSQLSERVERR;initial Catalog=KubaBlogDB; User=sa;Password=622622aA.;MultipleActiveResultSets=true");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
