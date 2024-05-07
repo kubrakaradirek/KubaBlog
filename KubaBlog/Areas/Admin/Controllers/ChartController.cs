@@ -23,18 +23,34 @@ namespace KubaBlog.Areas.Admin.Controllers
             });
             list.Add(new CategoryClass
             {
-                categoryName = "Yazılım",
+                categoryName = "Kişisel",
                 categoryCount = 14
             });
             list.Add(new CategoryClass
             {
-                categoryName = "Spor",
+                categoryName = "Seyahat",
                 categoryCount = 5
             });
             list.Add(new CategoryClass
             {
-                categoryName = "Sinema",
+                categoryName = "Yaşam",
                 categoryCount = 2
+            }); list.Add(new CategoryClass
+            {
+                categoryName = "Moda",
+                categoryCount = 4
+            }); list.Add(new CategoryClass
+            {
+                categoryName = "Finans",
+                categoryCount = 12
+            }); list.Add(new CategoryClass
+            {
+                categoryName = "Aile",
+                categoryCount = 3
+            }); list.Add(new CategoryClass
+            {
+                categoryName = "Sanat",
+                categoryCount = 7
             });
 
             return Json(new { jsonlist = list });

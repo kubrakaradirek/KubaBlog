@@ -25,7 +25,7 @@ namespace KubaBlog.Controllers
         {
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
-            comment.BlogId = 5;
+            comment.BlogId = 3;
             cm.CommentAdd(comment);
             Response.Redirect("/Blog/Index/" + 1);
             return PartialView();

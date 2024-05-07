@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
@@ -20,8 +21,8 @@ namespace KubaBlog.Areas.Admin.Controllers
         }
         public IActionResult GetWriterByID(int writerid)
         {
-            var findWriter = writers.FirstOrDefault(x => x.Id == writerid);
-            var JsonWriters = JsonConvert.SerializeObject(findWriter);
+            var writerId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var JsonWriters = JsonConvert.SerializeObject(writerId);
             return Json(JsonWriters);
         }
         [HttpPost]
@@ -51,22 +52,22 @@ namespace KubaBlog.Areas.Admin.Controllers
             new WriterClass
             {
                 Id = 1,
-                Name = "Samet"
+                Name = "Kübra"
             },
             new WriterClass
             {
                 Id = 2,
-                Name = "Şevval"
+                Name = "Nazlıcan"
             },
             new WriterClass
             {
                 Id = 3,
-                Name = "Nurana"
+                Name = "Hicran"
             },
             new WriterClass
             {
                 Id = 4,
-                Name = "Mete Serkan"
+                Name = "Ayşe Yazar"
             }
 
         };
