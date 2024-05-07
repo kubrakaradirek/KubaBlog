@@ -2,11 +2,13 @@
 using KubaBlog.BusinessLayer.ValidationRules;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace KubaBlog.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         WriterManager vm=new WriterManager(new EfWriterRepository());

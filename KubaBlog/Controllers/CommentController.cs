@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator,Writer")]
     [AllowAnonymous]
     public class CommentController : Controller
     {

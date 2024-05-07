@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.DataAccessLayer", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlog.BusinessLayer", "KubaBlog.BusinessLayer\KubaBlog.BusinessLayer.csproj", "{AF430CDC-48B4-4889-B104-2E66CF94F087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlogApi", "KubaBlogApi\KubaBlogApi.csproj", "{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KubaBlogApi", "KubaBlogApi\KubaBlogApi.csproj", "{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KubaBlog.jwt", "KubaBlog.jwt\KubaBlog.jwt.csproj", "{3E3DF949-19B8-4A8D-BDFE-24660AF9FCC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FBCEBCD-9969-459E-BA1D-AB1572ADC952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E3DF949-19B8-4A8D-BDFE-24660AF9FCC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E3DF949-19B8-4A8D-BDFE-24660AF9FCC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E3DF949-19B8-4A8D-BDFE-24660AF9FCC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E3DF949-19B8-4A8D-BDFE-24660AF9FCC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

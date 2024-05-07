@@ -1,10 +1,12 @@
 ﻿using KubaBlog.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class WriterController : Controller
     {
         public IActionResult Index()

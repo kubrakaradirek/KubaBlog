@@ -148,7 +148,6 @@ namespace KubaBlog.DataAccessLayer.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -322,6 +321,9 @@ namespace KubaBlog.DataAccessLayer.Migrations
                     b.Property<string>("CommentUserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.HasKey("CommentId");
 

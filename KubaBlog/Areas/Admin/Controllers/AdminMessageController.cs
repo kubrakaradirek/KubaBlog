@@ -2,12 +2,14 @@
 using KubaBlog.DataAccessLayer.Concrete;
 using KubaBlog.DataAccessLayer.EntityFramework;
 using KubaBlog.EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminMessageController : Controller
     {
         Message2Manager mm = new Message2Manager(new EfMessage2Reposiyory());

@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Configuration;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace KubaBlog.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator,Writer")]
     [AllowAnonymous]
     public class BlogController : Controller
     {

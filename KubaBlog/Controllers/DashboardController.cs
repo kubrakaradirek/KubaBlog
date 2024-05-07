@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace KubaBlog.Controllers
 {
+    [Authorize(Roles = "Admin,Moderator,Writer")]
     public class DashboardController : Controller
     {
         BlogManager bm=new BlogManager(new EfBlogRepository());

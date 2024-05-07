@@ -34,6 +34,15 @@ builder.Services.AddAuthentication(
           x.LoginPath = "/Login/Index";
       }
     );
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    //Cookie Settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromSeconds(100);
+    options.AccessDeniedPath = new PathString("/Login/AccessDenied");
+    options.LoginPath = "/Login/Index/";
+    options.SlidingExpiration = true;
+});
 
 var app = builder.Build();
 
@@ -65,7 +74,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Blog}/{action=Index}/{id?}");
 
 
 app.Run();

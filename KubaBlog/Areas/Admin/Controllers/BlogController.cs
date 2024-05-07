@@ -1,12 +1,14 @@
 ﻿using ClosedXML.Excel;
 using KubaBlog.Areas.Admin.Models;
 using KubaBlog.DataAccessLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
         //Excellden bilgi çekmek için

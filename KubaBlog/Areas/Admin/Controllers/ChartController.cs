@@ -1,9 +1,11 @@
 ﻿using KubaBlog.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KubaBlog.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ChartController : Controller
     {
         public IActionResult Index()
