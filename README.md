@@ -1,4 +1,4 @@
-Bu proje, Murat Yücedağ ile ASP.Net Core YouTube proje kampında 150 derslik bir süreç sonunda geliştirilmiştir. ASP.Net Core 6 MVC ile hazırlanmıştır. Proje geliştirilirken HTML5, CSS3, JS ve Bootstrap gibi teknolojiler kullanılmıştır. Ayrıca, Enttity Framework kullanılarak veritabanı işlemleri gerçekleştirilmiştir. Projede kullanılan eklentiler arasında DataTables, Google Chart, Full Calendar, Sweet Alert ve Fluent Validation bulunmaktadır. API'lerle desteklenen proje, Entity Framework Code First yaklaşımıyla oluşturulmuştur ve veritabanı olarak MsSql kullanılmıştır. N-Tier Architecture tabanlı bir ASP.Net MVC Projesi olan projede, SOLID prensiplerine mümkün olduğunca uyulmuştur. Kullanıcı, Yazar ve Admin panellerine sahip kapsamlı bir blog sitesi geliştirilmiştir.
+Bu proje, Murat Yücedağ ile ASP.Net Core YouTube proje kampında 150 derslik bir süreç sonunda geliştirilmiştir. ASP.Net Core 6 MVC ile hazırlanmıştır. Proje geliştirilirken HTML5, CSS3, JS ve Bootstrap gibi teknolojiler kullanılmıştır. Ayrıca, Enttity Framework kullanılarak veritabanı işlemleri gerçekleştirilmiştir. Projede kullanılan eklentiler arasında DataTables, Google Chart, Sweet Alert ve Fluent Validation bulunmaktadır. API'lerle desteklenen proje, Entity Framework Code First yaklaşımıyla oluşturulmuştur ve veritabanı olarak MsSql kullanılmıştır. N-Tier Architecture tabanlı bir ASP.Net MVC Projesi olan projede, SOLID prensiplerine mümkün olduğunca uyulmuştur. Kullanıcı, Yazar ve Admin panellerine sahip kapsamlı bir blog sitesi geliştirilmiştir.
 
 ## N-Tier Architecture
 -	Entity Layer
@@ -143,6 +143,12 @@ Bu buton, kullanıcıyı blog sitesine yönlendirir.
 Bu kısımda çıkış yaparak otomatik olarak kullanıcı sayfasındaki giriş yap bölümüne yönlendirilirsiniz.
 
 Kullanıcı yüzünde giriş yapan kullanıcı istediği bloğa yorum yapabilir.Son blogları kullanıcı arayüzünde güncellenir. Bize ulaşın kısmından mesaj iletebilir.Giriş yapmayan kullanıcı üye olabilir veya abone ol bülteninden email adresiyle abone olabilir.Yazar ve admin eklemelerine göre dinamik bir formatta tasarlanmıştır.
+
+https://github.com/kubrakaradirek/KubaBlog/assets/133059827/25e64128-5170-4612-bde7-73eb117e4683
+
+
+
+
 
 
 
